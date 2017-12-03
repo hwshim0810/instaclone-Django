@@ -47,7 +47,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
-    'allauth.socialaccount',  # registration
+    'allauth.socialaccount',  # registration,
+    'rest_framework', # REST Framework
 ]
 
 # Apps specific for this project go here.
