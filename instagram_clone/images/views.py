@@ -27,3 +27,31 @@ class Feed(APIView):
         serializer = serializers.ImageSerializer(sorted_list, many=True)
 
         return Response(serializer.data)
+
+
+class LikeImage(APIView):
+
+    def get(self, request, image_id, format=None):
+
+        user = request.user
+
+        try:
+            found_image = models.Image.objects.get(id=image_id)
+        except models.Image.DoesNotExist:
+            return Response(status=404)
+
+        try:
+            preexisting_like = models.Like.objects.get(
+                creator=user,
+                image=found_image
+            )
+            preexisting_like.delete()
+            return Response(status=200)
+
+        except models.Image.DoesNotExist:
+            new_like = models.Like.objects.create(
+               creator=user,
+                image=found_image
+            )
+            return Response(status=200)
+        
