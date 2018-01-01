@@ -308,3 +308,4 @@ instagram_clone/media/
 
 # Personal space
 *.code-workspace
+.vscode
