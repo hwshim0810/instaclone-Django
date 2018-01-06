@@ -8,7 +8,7 @@ from . import models
 
 class UserProfileSerializer(serializers.ModelSerializer):
 
-    images = image_serializers.UserProfileImageSerializer(many=True)
+    images = image_serializers.CountImageSerializer(many=True)
 
     class Meta:
         model = models.User
