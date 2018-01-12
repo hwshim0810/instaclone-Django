@@ -19,7 +19,7 @@ class ImageAdmin(admin.ModelAdmin):
     )
 
     list_display = (
-        'file', 'location', 'caption', 'creator', 'created_at', 'updated_at'
+        'id', 'file', 'location', 'caption', 'creator', 'created_at', 'updated_at'
     )
 
 
