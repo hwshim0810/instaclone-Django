@@ -2,6 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from instagram_clone.notifications import views as notification_views
+
 from . import models, serializers
 
 
@@ -30,6 +32,8 @@ class FollowUser(APIView):
         user.following.add(user_to_follow)
         
         user.save()
+
+        notification_views.create_notification(user, user_to_follow, 'follow')
 
         return Response(status=status.HTTP_200_OK)
 
