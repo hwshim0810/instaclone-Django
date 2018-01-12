@@ -58,6 +58,7 @@ LOCAL_APPS = [
     'instagram_clone.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'instagram_clone.images.apps.ImagesConfig',
+    'instagram_clone.notifications.apps.NotificationsConfig'
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
