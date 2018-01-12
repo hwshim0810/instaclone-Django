@@ -19,3 +19,4 @@ class Notification(image_models.TimeStampedModel):
     to = models.ForeignKey(user_models.User, related_name='to')
     notification_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     image = models.ForeignKey(image_models.Image, blank=True, null=True)
+    comment = models.TextField(blank=True, null=True)

@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
-    url(r'^images/', include('instagram_clone.images.urls', namespace='images'))
+    url(r'^images/', include('instagram_clone.images.urls', namespace='images')),
+    url(r'^notifications/', include('instagram_clone.notifications.urls', namespace='notifications'))
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

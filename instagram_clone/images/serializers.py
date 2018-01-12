@@ -4,6 +4,17 @@ from instagram_clone.users import models as user_models
 from . import models
 
 
+class SmallImageSerializer(serializers.ModelSerializer):
+
+    """ Used for the notifications"""
+
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+        )
+
+
 class CountImageSerializer(serializers.ModelSerializer):
 
     class Meta:
