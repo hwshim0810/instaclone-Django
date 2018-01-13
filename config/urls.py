@@ -5,14 +5,15 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
-urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+from rest_framework_jwt.views import obtain_jwt_token
 
+
+urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
 
     # User management
+    url(r'^api-token-auth/', obtain_jwt_token),
     url(r'^users/', include('instagram_clone.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
 

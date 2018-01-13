@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',  # registration,
     'rest_framework', # REST Framework,
     'taggit', # Tags for photos
+    'taggit_serializer',
 ]
 
 # Apps specific for this project go here.
@@ -279,3 +280,17 @@ ADMIN_URL = r'^admin/'
 
 # Taggit Config : Tag ignore case
 TAGGIT_CASE_INSENSITIVE = True
+
+REST_FRAMEWORK = {
+    # All request needs authentiaction
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # For app, frontend
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # For admin
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
