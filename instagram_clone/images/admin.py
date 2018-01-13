@@ -35,5 +35,5 @@ class LikeAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     
     list_display = (
-        'message', 'creator', 'image', 'created_at', 'updated_at'
+        'id', 'message', 'creator', 'image', 'created_at', 'updated_at'
         )
