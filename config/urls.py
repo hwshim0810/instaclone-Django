@@ -7,6 +7,8 @@ from django.views import defaults as default_views
 
 from rest_framework_jwt.views import obtain_jwt_token
 
+from instagram_clone import views
+
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
@@ -20,7 +22,8 @@ urlpatterns = [
 
     # Your stuff: custom urls includes go here
     url(r'^images/', include('instagram_clone.images.urls', namespace='images')),
-    url(r'^notifications/', include('instagram_clone.notifications.urls', namespace='notifications'))
+    url(r'^notifications/', include('instagram_clone.notifications.urls', namespace='notifications')),
+    url(r'^', views.ReactAppView.as_view()),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
