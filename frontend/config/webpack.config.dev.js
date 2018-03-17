@@ -192,7 +192,9 @@ module.exports = {
               {
                 loader: require.resolve('sass-loader'),
                 options: {
-                  sourceMap: true
+                  sourceMap: true,
+                  //  All components include underline
+                  data: `@import "${paths.appSrc}/config/_variables.scss";`  // provice '/src' path from paths.js
                 }
               }
             ],
