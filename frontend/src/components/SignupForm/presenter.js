@@ -13,18 +13,56 @@ const SignupForm = props => (
             with Facebook
         </button>
         <span className={formStyles.divider}>or</span>
-        <form className={formStyles.form}>
-            <input className={formStyles.textInput} type="email" placeholder="Email" />
-            <input className={formStyles.textInput} type="text" placeholder="Full Name" />
-            <input className={formStyles.textInput} type="username" placeholder="Username" />
-            <input className={formStyles.textInput} type="password" placeholder="Password" />
-            <input className={formStyles.button} type="submit" value="Sign up" />
+        <form 
+            className={formStyles.form}
+            onSubmit={props.handleSubmit}>
+            <input 
+                className={formStyles.textInput} 
+                type="email" 
+                name="email"
+                value={props.emailValue}
+                onChange={props.handleInputChange}
+                placeholder="Email" />
+            <input 
+                className={formStyles.textInput} 
+                type="text" 
+                name="fullname"
+                value={props.fullnameValue}
+                onChange={props.handleInputChange}
+                placeholder="Full Name" />
+            <input 
+                className={formStyles.textInput} 
+                type="username" 
+                name="username"
+                value={props.usernameValue}
+                onChange={props.handleInputChange}
+                placeholder="Username" />
+            <input 
+                className={formStyles.textInput} 
+                type="password" 
+                name="password"
+                value={props.passwordValue}
+                onChange={props.handleInputChange}
+                placeholder="Password" />
+            <input 
+                className={formStyles.button} 
+                type="submit" 
+                value="Sign up" />
         </form>
         <p className={formStyles.terms}>
             By signing up, you agree to our <span>Terms & Privacy Policy</span>.
         </p>
     </div>
 );
+
+SignupForm.propTypes = {
+    emailValue: PropTypes.string.isRequired,
+    fullnameValue: PropTypes.string.isRequired,
+    usernameValue: PropTypes.string.isRequired,
+    passwordValue: PropTypes.string.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
+}
 
 SignupForm.contextTypes = {
     t: PropTypes.func.isRequired
