@@ -5,10 +5,27 @@ import formStyles from 'shared/formStyles.scss';
 
 const LoginForm = props => (
     <div className={formStyles.formComponent}>
-        <form className={formStyles.form}>
-            <input className={formStyles.textInput} type="text" placeholder="Username" />
-            <input className={formStyles.textInput} type="password" placeholder="Password" />
-            <input className={formStyles.button} type="submit" value="Login" />
+        <form 
+            className={formStyles.form} 
+            onSubmit={props.handleSubmit}>
+            <input 
+                className={formStyles.textInput} 
+                type="text" 
+                placeholder="Username"
+                value={props.usernameValue}
+                onChange={props.handleInputChange}
+                name="username" />
+            <input 
+                className={formStyles.textInput} 
+                type="password" 
+                placeholder="Password"
+                value={props.passwordValue}
+                onChange={props.handleInputChange}
+                name="password" />
+            <input 
+                className={formStyles.button} 
+                type="submit" 
+                value="Login" />
         </form>
         <span className={formStyles.divider}>or</span>
         <span className={formStyles.facebookLink}>
@@ -18,6 +35,14 @@ const LoginForm = props => (
         <span className={formStyles.forgotLink}>Forgot password?</span>
     </div>
 );
+
+
+LoginForm.propTypes = {
+    usernameValue: PropTypes.string.isRequired,
+    passwordValue: PropTypes.string.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
+};
 
 LoginForm.contextTypes = {
     t: PropTypes.func.isRequired
