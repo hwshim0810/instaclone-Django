@@ -16,6 +16,7 @@ class Container extends Component {
         return <SignupForm
             handleInputChange={this._handleInputChange}
             handleSubmit={this._handleSubmit}
+            handleFacebookLogin={this._handleFacebookLogin}
             emailValue={email}
             fullnameValue={fullname}
             usernameValue={username} 
@@ -33,6 +34,10 @@ class Container extends Component {
         event.preventDefault();
         // Redux action :: transfer date to backend
         console.log(this.state);
+    };
+
+    _handleFacebookLogin = response => {
+
     };
 }
 
