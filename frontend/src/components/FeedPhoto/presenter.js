@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.scss';
 import PhotoActions from 'components/PhotoActions';
+import PhotoComments from 'components/PhotoComments';
 
 
 const FeedPhoto = (props, context) => {
@@ -23,6 +24,11 @@ const FeedPhoto = (props, context) => {
             />
             <div className={styles.meta}>
                 <PhotoActions number={props.like_count} />
+                <PhotoComments
+                    caption={props.caption}
+                    creator={props.creator.username}
+                    comments={props.comments}
+                />
             </div>
         </div>
     );
