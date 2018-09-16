@@ -6,6 +6,8 @@ import { actionCreators as userActions } from 'redux/modules/user';
 const SET_FEED = "SET_FEED";
 const LIKE_PHOTO = "LIKE_PHOTO";
 const UNLIKE_PHOTO = "UNLIKE_PHOTO";
+const ADD_COMMENT = "ADD_COMMENT";
+const DELETE_COMMENT = "DELETE_COMMENT";
 
 // action creators
 
@@ -30,6 +32,22 @@ function doUnlikePhoto(photoId) {
     };
 }
 
+function addComment(photoId, comment) {
+    return {
+        type: ADD_COMMENT,
+        photoId,
+        comment
+    };
+}
+
+function removeComment(photoId, messageId) {
+    return {
+        type: DELETE_COMMENT,
+        photoId,
+        messageId
+    };
+}
+
 // API actions
 
 function getFeed() {
@@ -37,7 +55,8 @@ function getFeed() {
         const { user: { token } } = getState();
         fetch('/images/', {
             headers: {
-                'Authorization': `JWT ${token}`
+                'Authorization': `JWT ${token}`,
+                "Content-Type": "application/json"
             }
         })
         .then(response => {
@@ -112,7 +131,14 @@ function commentPhoto(photoId, message) {
             if (response.status === 401) {
                 dispatch(userActions.logout());
             }
-        });
+            return response.json();
+        })
+        .then(json => {
+            if (json.message) {
+                dispatch(addComment(photoId, json));
+            }
+        })
+        .catch(err => console.error(err));
     };
 }
 
@@ -130,6 +156,8 @@ function reducer(state = initalState, action) {
             return applyLikePhoto(state, action);
         case UNLIKE_PHOTO:
             return applyUnlikePhoto(state, action);
+        case ADD_COMMENT:
+            return applyAddComment(state, action);
         default:
             return state;
     }
@@ -176,6 +204,22 @@ function applyUnlikePhoto(state, action) {
         return photo;
     });
 
+    return { ...state, feed: updatedFeed };
+}
+
+function applyAddComment(state, action) {
+    const { photoId, comment } = action;
+    const { feed } = state;
+    const updatedFeed = feed.map(photo => {
+        if (photo.id === photoId) {
+            return {
+                ...photo,
+                comments: [...photo.comments, comment]
+            };
+        }
+        return photo;
+    });
+    
     return { ...state, feed: updatedFeed };
 }
 
