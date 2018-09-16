@@ -12,6 +12,7 @@
     resize: none;
     width: 100%;
     font-size: $normal-font-size;
+    overflow: hidden;
     
     &:focus {
       outline: none;

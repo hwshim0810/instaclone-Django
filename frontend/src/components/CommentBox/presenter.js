@@ -5,13 +5,23 @@ import styles from './styles.scss';
 
 
 const CommentBox = (props, context) => (
-    <form className={styles.commentBox}>
+    <form className={styles.commentBox} onSubmit={props.handleSubmit}>
         <Textarea 
             className={styles.input}
-            placeholder={context.t('Add a comment...')} 
+            placeholder={context.t('Add a comment...')}
+            onChange={props.handleInputChange} 
+            onKeyPress={props.handleKeyPress}
+            value={props.comment}
         />
     </form>
 );
+
+CommentBox.propTypes = {
+    comment: PropTypes.string.isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleKeyPress: PropTypes.func.isRequired,
+}
 
 CommentBox.contextTypes = {
     t: PropTypes.func.isRequired
