@@ -20,6 +20,10 @@
       justify-content: center;
       align-items: center;
       border-bottom: 2px solid $light-grey;
+      
+      svg {
+        cursor: pointer;
+      }
 
       .title {
         order: 1;
@@ -40,7 +44,4 @@
 
   }
 
-  svg {
-    cursor: pointer;
-  }
 }

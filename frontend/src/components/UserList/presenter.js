@@ -29,7 +29,7 @@ const UserList = props => (
 );
 
 const RenderUsers = props => (
-    props.userList.map(user => <UserRow user={user} key={user.id} />)
+    props.userList.map(user => <UserRow horizontal={true} user={user} key={user.id} />)
 );
 
 UserList.propTypes = {

@@ -4,7 +4,7 @@ import styles from './styles.scss';
 
 
 const UserRow = (props, context) => (
-    <div className={styles.container}>
+    <div className={props.horizontal ? styles.horizontal : styles.vertical}>
         <div className={styles.column}>
             <img
                 src={props.user.profile_image || require('images/noPhoto.jpg')}
@@ -41,6 +41,8 @@ UserRow.propTypes = {
     }).isRequired,
     big: PropTypes.bool,
     handleClick: PropTypes.func.isRequired,
+    horizontal: PropTypes.bool,
+    vertical: PropTypes.bool,
 };
 
 UserRow.defaultProps = {
