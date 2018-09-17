@@ -1,4 +1,13 @@
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import Container from './container';
 
-export default connect()(Container);
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        goToSearch: term => {
+            dispatch(push(`/search/${term}`));
+        }
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Container);

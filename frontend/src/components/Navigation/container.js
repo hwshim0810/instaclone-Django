@@ -1,11 +1,45 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Navigation from './presenter';
 
 
 class Container extends Component {
-    render() {
-        return <Navigation />;
+
+    state = {
+        term: ''
     }
+
+    static propTypes = {
+        goToSearch: PropTypes.func.isRequired,
+    };
+
+    render() {
+        return (
+            <Navigation 
+                onSubmit={this._onSubmit}
+                onInputChange={this._onInputChange}
+                value={this.state.term}
+            />
+        );
+    }
+
+    _onInputChange = event => {
+        const { target: { value } } = event;
+        this.setState({
+            term: value
+        });
+    }
+
+    _onSubmit = event => {
+        const { term } = this.state;
+        const { goToSearch } = this.props;
+        event.preventDefault();
+        goToSearch(term);
+        this.setState({
+            term: ''
+        });
+    }
+
 }
 
 export default Container;
