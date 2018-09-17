@@ -23,10 +23,13 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     url(r'^images/', include('instagram_clone.images.urls', namespace='images')),
     url(r'^notifications/', include('instagram_clone.notifications.urls', namespace='notifications')),
-    url(r'^', views.ReactAppView.as_view()),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    url(r'^', views.ReactAppView.as_view()),
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit

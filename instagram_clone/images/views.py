@@ -35,7 +35,7 @@ class Images(APIView):
 
         sorted_list = sorted(image_list, key=lambda image:image.created_at, reverse=True)
 
-        serializer = serializers.ImageSerializer(sorted_list, many=True)
+        serializer = serializers.ImageSerializer(sorted_list, many=True, context={'request': request})
 
         return Response(serializer.data)
 
@@ -65,7 +65,7 @@ class LikeImage(APIView):
 
         users = user_models.User.objects.filter(id__in=like_creators_ids)
 
-        serializer = user_serializers.ListUserSerializer(users, many=True)
+        serializer = user_serializers.ListUserSerializer(users, many=True, context={'request': request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -229,7 +229,7 @@ class ImageDetail(APIView):
         image = self.find_own_image(image_id, user)
 
         if image is None:
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = serializers.InputImageSerializer(image, data=request.data, partial=True)  # Partial Update : Not require all fields
 
@@ -251,7 +251,7 @@ class ImageDetail(APIView):
         image = self.find_own_image(image_id, user)
 
         if image is None:
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         image.delete()
 
