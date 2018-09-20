@@ -185,13 +185,12 @@ class Search(APIView):
 
             images = models.Image.objects.filter(tags__name__in=hashtags).distinct()
 
-            serializer = serializers.CountImageSerializer(images, many=True)
-
-            return Response(data=serializer.data, status=status.HTTP_200_OK)
-
         else:
+            images = models.Image.objects.all()[:20]
 
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        serializer = serializers.CountImageSerializer(images, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
 class ModerateComments(APIView):
