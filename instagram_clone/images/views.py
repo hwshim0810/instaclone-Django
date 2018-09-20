@@ -55,6 +55,19 @@ class Images(APIView):
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class MyImages(APIView):
+
+    def get(self, request, format=None):
+
+        user = request.user
+
+        my_images = user.images.all().order_by('-created_at')
+
+        serializer = serializers.ImageSerializer(my_images, many=True, context={'request': request})
+
+        return Response(serializer.data)
+
+
 class LikeImage(APIView):
 
     def get(self, request, image_id, format=None):
