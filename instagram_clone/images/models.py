@@ -40,6 +40,10 @@ class Image(TimeStampedModel):
     def natural_time(self):
         return naturaltime(self.created_at)
 
+    @property
+    def is_vertical(self):
+        return self.file.width < self.file.height
+
     def __str__(self):
         return '{} - {}'.format(self.location, self.caption)
 
